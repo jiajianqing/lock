@@ -13,24 +13,39 @@ import java.util.concurrent.CopyOnWriteArraySet;
  */
 public class ContainerNotSafeDemo {
     public static void main(String[] args) {
+
 //        new ArrayList<Integer>().add(1);
 
-        //region ArrayList情况
-//                List<String> list = new ArrayList<>();
-//        解决
+        //region 第一种方式 单线程
+
+//        List<String> list = new ArrayList<>();
+//        list.add("a");
+//        list.add("b");
+//        list.add("c");
+//
+//        for (String element : list) {
+//            System.out.println(element);
+//        }
+        //endregion
+
+        //region 1.ArrayList情况
+//        List<String> list = new ArrayList<>();
+//        解决1 2 3
 //        List<String> list = new Vector<>();
 //        List<String> list = Collections.synchronizedList(new ArrayList<>());
-
 //        List<String> list = new  CopyOnWriteArrayList<>();
+
+
+//         java.util.ConcurrentModificationException   出现并发修改异常
+//        for (int i = 1; i <= 30; i++) {
+//            new Thread(() -> {
+//                list.add(UUID.randomUUID().toString().substring(0, 8));
+//                System.out.println(list);
+//            }, String.valueOf(i)).start();
+//        }
         //endregion
 
-
-        //region HashSet
-        Set<String> set = new HashSet<>();
-//        Set<String> set = new CopyOnWriteArraySet<>();
-        //endregion
-
-        //region Map在高并发多线程下的一种不安全情况
+        //region 2.Map在高并发多线程下的一种不安全情况
 //        Map<String,String> map = new HashMap<>();
 //        Map<String,String> map = new ConcurrentHashMap<>();
 //
@@ -42,7 +57,9 @@ public class ContainerNotSafeDemo {
 //        }
         //endregion
 
-        //region HashSet在高并发多线程下的一种不安全情况
+        //region 3.HashSet在高并发多线程下的一种不安全情况
+//        Set<String> set = new HashSet<>();
+//        Set<String> set = new CopyOnWriteArraySet<>();
 //        for (int i = 1; i <= 30; i++) {
 //            new Thread(() -> {
 //                set.add(UUID.randomUUID().toString().substring(0, 8));
@@ -53,27 +70,6 @@ public class ContainerNotSafeDemo {
 //        new HashSet<>().add("a");
         //endregion
 
-        //region 第一种方式 单线程
-
-//        list.add("a");
-//        list.add("b");
-//        list.add("c");
-//
-//        for (String element : list){
-//            System.out.println(element);
-//        }
-        //endregion
-
-
-        //region 第二种方式 ArrayList在高并发多线程下的一种不安全情况
-        // java.util.ConcurrentModificationException
-//        for (int i = 1; i <= 30; i++) {
-//            new Thread(() -> {
-//                list.add(UUID.randomUUID().toString().substring(0, 8));
-//                System.out.println(list);
-//            }, String.valueOf(i)).start();
-//        }
-        //endregion
 
 
         /**
@@ -88,7 +84,7 @@ public class ContainerNotSafeDemo {
          *  3.2 Collections.synchronizedList(new ArrayList<>());
          *
          *
-         * 4.优化建议（同样的错误不烦第2次）
+         * 4.优化建议（同样的错误不犯第2次）
          */
 
 
